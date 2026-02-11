@@ -1,0 +1,701 @@
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f7f7f9;
+    --accent: #e02626;
+    --accent-soft: #ffe7e7;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border-soft: #e5e7eb;
+    --card-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+    --radius-card: 24px;
+    --radius-pill: 999px;
+    --blue-soft: #e6f1ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+      "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; text-decoration: none; }
+
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 24px 72px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-img {
+    height: 44px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 32px;
+    font-size: 16px;
+  }
+
+  .nav a {
+    position: relative;
+    font-weight: 500;
+  }
+
+  .nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width 0.18s ease;
+  }
+
+  .nav a:hover::after {
+    width: 100%;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    padding: 32px 24px;
+    background: #fafafb;
+    border-radius: 32px;
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 0.06);
+    margin-bottom: 40px;
+  }
+
+  .hero-heading {
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 420px;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    border-radius: var(--radius-pill);
+    padding: 12px 26px;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease,
+      background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 16px 30px rgba(220, 38, 38, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 20px 40px rgba(220, 38, 38, 0.45);
+    background: #cc1f1f;
+  }
+
+  .btn-outline {
+    background: #ffffff;
+    color: #111827;
+    border-color: var(--border-soft);
+  }
+
+  .btn-outline:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+  }
+
+  .hero-note {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quote-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 26px;
+    box-shadow: var(--card-shadow);
+    max-width: 380px;
+    text-align: center;
+    position: relative;
+  }
+
+  .quote-card::before {
+    content: "“";
+    position: absolute;
+    left: 18px;
+    top: 10px;
+    font-size: 40px;
+    color: #e5e7eb;
+  }
+
+  .quote-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .brands-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 18px;
+  }
+
+  .brands-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .brand-card {
+    border-radius: var(--radius-card);
+    padding: 24px 24px 22px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: #ffffff;
+  }
+
+  .brand-card.mora {
+    background: var(--blue-soft);
+    border-color: rgba(37, 99, 235, 0.15);
+  }
+
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .brand-logo {
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .brand-pill {
+    margin-top: 4px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: rgba(15, 23, 42, 0.04);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .brand-body {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .brand-cta {
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+  }
+
+  .brand-cta span {
+    margin-left: 6px;
+    font-size: 16px;
+  }
+
+  .about {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 32px;
+    align-items: center;
+  }
+
+  .about h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .about p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .about-media {
+    height: 220px;
+    border-radius: 24px;
+    border: 1px dashed #d1d5db;
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .training {
+    margin: 40px 0;
+    padding: 28px 24px 30px;
+    border-radius: 32px;
+    background: var(--bg-soft);
+  }
+
+  .training-header {
+    margin-bottom: 18px;
+  }
+
+  .training-header h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .training-header p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .training-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+  }
+
+  .training-card {
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 18px 18px 20px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  }
+
+  .training-card h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .training-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .future {
+    margin: 40px 0;
+  }
+
+  .future-header {
+    margin-bottom: 16px;
+  }
+
+  .future-header h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .future-header p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 520px;
+  }
+
+  .future-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 16px;
+  }
+
+  .future-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 14px 16px 16px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.03);
+    font-size: 14px;
+  }
+
+  .future-card h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .future-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .contact {
+    margin-top: 48px;
+    padding: 26px 24px 28px;
+    border-radius: 28px;
+    background: #111827;
+    color: #f9fafb;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 28px;
+    align-items: center;
+  }
+
+  .contact h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .contact p {
+    font-size: 14px;
+    color: #e5e7eb;
+    margin-bottom: 10px;
+  }
+
+  .contact .btn-primary {
+    background: #f97316;
+    border-color: transparent;
+    box-shadow: 0 16px 40px rgba(248, 113, 22, 0.5);
+  }
+
+  .contact .btn-primary:hover {
+    background: #ea580c;
+  }
+
+  .contact-info p {
+    margin-bottom: 4px;
+  }
+
+  .footer {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .hero-right {
+      justify-content: flex-start;
+    }
+    .about,
+    .contact {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .brands-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page {
+      padding: 16px 16px 48px;
+    }
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .nav {
+      gap: 18px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+    .hero {
+      padding: 22px 18px;
+    }
+    .hero-heading {
+      font-size: 30px;
+    }
+    .brands-section {
+      margin-top: 28px;
+    }
+  }
+</style>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <!-- Swap src with your Wix logo URL -->
+      <img src="power-athletics-logo.png" alt="Power Athletics" class="logo-img" />
+    </div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#training">Training</a>
+      <a href="#brands">Brands</a>
+      <a href="#future">Future Campus</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1 class="hero-heading">Power Athletics: Forging Elite Athletes</h1>
+      <p class="hero-sub">
+        Where serious training, real coaching, and sport-specific development
+        all live in the same place.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get Started</a>
+        <a href="#training" class="btn-outline">View Training Options</a>
+      </div>
+      <p class="hero-note">
+        Built for busy families, competitive athletes, and adults who want
+        training that actually transfers to sport and life.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="quote-card">
+        <div class="quote-text">
+          Power Athletics: an elite home for strength and sport development.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section class="brands-section" id="brands">
+    <h2 class="section-title">Our brands</h2>
+    <div class="brands-row">
+      <!-- Mora Athletics -->
+      <a href="https://powerathleticsga.com/moraathletics/" class="brand-card mora">
+        <div>
+          <div class="brand-header">
+            <!-- Swap src with Mora logo URL -->
+            <img src="mora-athletics-logo.png" alt="Mora Athletics" class="brand-logo" />
+            <div>
+              <div class="brand-name">Mora Athletics</div>
+              <div class="brand-pill">Baseball &amp; Softball Player Development</div>
+            </div>
+          </div>
+          <p class="brand-body">
+            Membership-based baseball and softball development with individualized plans,
+            1-on-1 coaching, and clear progress tracking.
+          </p>
+        </div>
+        <div class="brand-cta">
+          Explore Mora memberships <span>↗</span>
+        </div>
+      </a>
+
+      <!-- CrossFit 30004 -->
+      <a href="https://www.crossfit30004.com" class="brand-card">
+        <div>
+          <div class="brand-header">
+            <!-- Swap src with CF30004 logo URL -->
+            <img src="crossfit30004-logo.png" alt="CrossFit 30004" class="brand-logo" />
+            <div>
+              <div class="brand-name">CrossFit 30004</div>
+              <div class="brand-pill">CrossFit &amp; Strength</div>
+            </div>
+          </div>
+          <p class="brand-body">
+            High-accountability CrossFit and strength training for adults who want
+            to look, feel, and perform better.
+          </p>
+        </div>
+        <div class="brand-cta">
+          Visit CrossFit 30004 <span>↗</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div>
+      <h2>Why Power Athletics exists</h2>
+      <p>
+        Power Athletics was built to empower the best coaches to do what
+        they do best… <strong>TRAIN</strong> athletes.
+      </p>
+      <p>
+        Every program runs on the same standard: professional coaching,
+        individualized planning, and clear communication. As the campus
+        grows, new specialty programs plug into this system so families keep
+        everything in one place instead of juggling multiple facilities and
+        memberships.
+      </p>
+    </div>
+    <div class="about-media">
+      Facility / team photo placeholder
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section class="training" id="training">
+    <div class="training-header">
+      <h2>Programs designed for real-world schedules</h2>
+      <p>
+        From first-time gym members to varsity athletes, each track has a clear
+        path, defined expectations, and a coach who owns your development.
+      </p>
+    </div>
+    <div class="training-grid">
+      <div class="training-card">
+        <h3>CrossFit 30004 Group Classes</h3>
+        <p>
+          Coach-led CrossFit classes that blend strength, conditioning, and skill
+          progressions, scaled for every level.
+        </p>
+      </div>
+      <div class="training-card">
+        <h3>Mora Athletics Memberships</h3>
+        <p>
+          Individualized baseball and softball memberships with player-specific
+          coaching, development charts, and member-only benefits.
+        </p>
+      </div>
+      <div class="training-card">
+        <h3>Private Coaching &amp; Remote Support</h3>
+        <p>
+          One-on-one or small-group coaching for athletes who need deeper technical
+          work, accountability, or off-season planning.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE CAMPUS -->
+  <section class="future" id="future">
+    <div class="future-header">
+      <h2>Our future campus</h2>
+      <p>
+        Power Athletics is evolving into a full campus so athletes and families can
+        stack training, recovery, and life in one place.
+      </p>
+    </div>
+    <div class="future-grid">
+      <div class="future-card">
+        <h3>Field Sports (Lacrosse &amp; Soccer)</h3>
+        <p>Position-specific work and game-speed sessions for field-sport athletes.</p>
+      </div>
+      <div class="future-card">
+        <h3>Speed &amp; Agility</h3>
+        <p>Movement mechanics, linear speed, and change-of-direction training.</p>
+      </div>
+      <div class="future-card">
+        <h3>Basketball</h3>
+        <p>Skill work, shooting reps, and performance training that transfers to the court.</p>
+      </div>
+      <div class="future-card">
+        <h3>Volleyball</h3>
+        <p>Jump, power, and shoulder-health focused training with on-court skill sessions.</p>
+      </div>
+      <div class="future-card">
+        <h3>Jiu-Jitsu &amp; Combatives</h3>
+        <p>Technical instruction, conditioning, and mindset training in a structured setting.</p>
+      </div>
+      <div class="future-card">
+        <h3>Physical Therapy</h3>
+        <p>On-site rehab and return-to-play support integrated with your training plan.</p>
+      </div>
+      <div class="future-card">
+        <h3>Recovery &amp; Massage</h3>
+        <p>Soft-tissue and recovery services to keep athletes healthy across long seasons.</p>
+      </div>
+      <div class="future-card">
+        <h3>Nail Salon &amp; Self-Care</h3>
+        <p>Professional nail and self-care services stacked into training days.</p>
+      </div>
+      <div class="future-card">
+        <h3>Shared Workspace</h3>
+        <p>Quiet, well-equipped workspace so parents can work while athletes train.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <h2>Ready to get started?</h2>
+      <p>
+        Tell us whether you’re interested in CrossFit 30004, Mora Athletics, or both,
+        and we’ll connect you with the right coach and a clear next step.
+      </p>
+      <a href="mailto:info@powerathleticsga.com" class="btn-primary">
+        Book a Conversation
+      </a>
+    </div>
+    <div class="contact-info">
+      <p><strong>Power Athletics</strong></p>
+      <p>1060 Union Center Dr, Suite B</p>
+      <p>Alpharetta, GA 30004</p>
+      <p>Email: <a href="mailto:info@powerathleticsga.com">info@powerathleticsga.com</a></p>
+      <p>Phone: (770) 778-8171</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Power Athletics. All rights reserved.</span>
+    <span>Membership Hold · Privacy Policy · Membership Cancellation</span>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
